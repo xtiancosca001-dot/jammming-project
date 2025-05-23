@@ -1,0 +1,15 @@
+.header {
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    font-size: 1rem;
+    text-align: center;
+    background-color: #010c3f;
+}
+
+.header h1 {
+    padding: 0.5rem;
+}
+
+span {
+    color: #6c41ec;
+}
