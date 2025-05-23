@@ -14,3 +14,19 @@ body {
   object-fit: cover;
   background-position: center;
 }
+
+h1, h2 {
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  font-weight: 600;
+}
+
+p,a {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 200;
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+}

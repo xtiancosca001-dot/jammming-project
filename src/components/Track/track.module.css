@@ -1,0 +1,10 @@
+.track {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    border-bottom: 1px solid #fff;
+}
+
+.title {
+    font-weight: 500;
+}
