@@ -3,11 +3,11 @@ import TrackList from '../Tracklist/Tracklist';
 import styles from './search-results.module.css';
 
 
-function SearchResults({results}) {
+function SearchResults({results, resultsOnClick}) {
     return (
         <div className={styles.searchResults}>
             <h2>Results</h2>
-            {results.length>0 ? <TrackList tracks={results} operation={"+"}/> : <p>No results found</p> }
+            {results.length>0 ? <TrackList tracks={results} operation={"+"} operationOnClick={resultsOnClick}/> : <p>No results found</p> }
         </div>
     );
 }

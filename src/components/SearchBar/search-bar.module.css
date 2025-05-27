@@ -5,13 +5,13 @@
     margin: 5em 0;
 }
 
-.searchBar form {
+.searchBar .searchForm {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.searchBar form input {
+.searchBar .searchForm input {
     font-family: "Work Sans", sans-serif;
     text-align: center;
     padding: 0.77rem 0;
@@ -27,12 +27,12 @@
     color: #ffffffa6;
 }
 
-.searchBar form input:focus {
+.searchBar .searchForm input:focus {
     color: #fff;
     outline: none;
 }
 
-.searchBar form button {
+.searchBar .searchForm button {
     font-family: "Work Sans", sans-serif;
     font-weight: 500;
     width: 150px;
@@ -43,7 +43,7 @@
     border: 0;
 }
 
-.searchBar form button:hover {
+.searchBar .searchForm button:hover {
     transition: background-color 250ms;
     background-color: rgba(108, 65, 233, .7);
     cursor: pointer;

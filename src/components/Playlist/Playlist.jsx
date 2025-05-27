@@ -1,10 +1,14 @@
 import React from 'react';
 import styles from './playlist.module.css';
-function Playlist() {
+import TrackList from '../Tracklist/Tracklist';
+function Playlist({trackList, playlistOnChange, playlistOnSubmit, playlistTrackOnRemove }) {
     return (
         <div className={styles.playlist}>
-            <input type="text" placeholder="Enter a Playlist Name" />
-            <button type="submit">SAVE TO SPOTIFY</button>
+            <form className={styles.playlistForm} onSubmit={playlistOnSubmit}>
+                <input type="text" placeholder="Enter a Playlist Name" onChange={playlistOnChange} />
+                <TrackList tracks={trackList} operation={"-"} operationOnClick={playlistTrackOnRemove} />
+                <button type="submit">SAVE TO SPOTIFY</button>
+            </form>
         </div>
     );  
 }

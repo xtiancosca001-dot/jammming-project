@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './track.module.css'
 
-function Track({track, operation}) {
+function Track({track, operation, operationOnClick}) {
     return (
         <div className={styles.track}>
             <div>
@@ -9,7 +9,7 @@ function Track({track, operation}) {
                 <p>{track.artist} | {track.album}</p>
             </div>
             <div className={styles.operation}>
-                <a href="">{operation}</a>
+                <a id={track.id} onClick={operationOnClick}>{operation}</a>
             </div>
         </div>
     );

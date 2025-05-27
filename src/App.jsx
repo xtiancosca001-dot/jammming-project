@@ -12,6 +12,7 @@ function App() {
   const handleSearchTextChange = (e) => {
     setSearchText(e.target.value);
   }
+
   // handle onSubmit for search results
   const [searchResults, setSearchResults] = useState([]);
   const handleSearchSubmit = (e) => {
@@ -23,12 +24,40 @@ function App() {
     const results = tracks.filter(track => track.name.toLowerCase().includes(searchText.toLowerCase())); 
     setSearchResults(results);
   }
-  
+
+  // onChange for playlist name
+  const [playlistName, setPlaylistName] = useState("");
+  const handlePlaylistNameOnChange = (e) => {
+    setPlaylistName(e.target.value);
+  }
+
+  // playlistTrackList
+  const [playlistTracks, setPlaylistTracks] = useState([]);
+
+  // handle onClick for add button
+  const handleAddTrackToPlaylist = (e) => {
+    if(searchResults) {
+      const playlistTrack = searchResults.find(track=>track.id===parseInt(e.target.id));
+      const isDuplicate = playlistTracks.some(track => track.id === playlistTrack?.id);
+      if(playlistTrack && !isDuplicate){
+        setPlaylistTracks(prev => [...prev, playlistTrack]);
+      } else if(isDuplicate) {
+        alert(`The track "${playlistTrack.name}" is already in your playlist!`);
+      }
+    }
+  }
+  // handle onClick for remove track from Playlist
+  const handleRemoveTrackFromPlaylist = (e) => {
+    setPlaylistTracks(prev=>prev.filter(t=>t.id !== parseInt(e.target.id)));
+  }
+  const handlePlaylistOnSubmit = (e) => {
+    e.preventDefault();
+  }
   return (
     <>
       <Header />
       <SearchBar searchOnChange={handleSearchTextChange} searchHandler={handleSearchSubmit} />
-      <ResultsContainer results={searchResults} />
+      <ResultsContainer results={searchResults} resultsOnClick={handleAddTrackToPlaylist} playlistTracks={playlistTracks} playlistOnChange={handlePlaylistNameOnChange} playlistOnSubmit={handlePlaylistOnSubmit} playlistTrackOnRemove={handleRemoveTrackFromPlaylist} />
       <Footer />
     </>
   )

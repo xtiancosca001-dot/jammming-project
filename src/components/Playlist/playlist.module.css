@@ -7,6 +7,13 @@
     padding: 1rem;
 }
 
+.playlist .playlistForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    /* align-items: center; */
+}
+
 .playlist button {
     font-family: "Work Sans", sans-serif;
     font-weight: 500;
@@ -27,13 +34,13 @@
 
 .playlist input {
     font-family: "Poppins", sans-serif;
-    font-size: 1.25em;
-    width: 500px;
+    font-size: 1.5em;
+    font-weight: 600;
+    width: 100%;
     background: none;
     border: none;
     border-bottom: 1px solid #fff;
     color: #fff;
-    margin: 1em 0;
 }
 
 .playlist ::placeholder {
