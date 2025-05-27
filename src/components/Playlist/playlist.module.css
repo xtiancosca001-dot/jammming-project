@@ -24,3 +24,23 @@
     background-color: #5331b9;
     transition: background-color 250ms;
 }
+
+.playlist input {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.25em;
+    width: 500px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    margin: 1em 0;
+}
+
+.playlist ::placeholder {
+    color: #ffffffa6;
+}
+
+.playlist input:focus {
+    color: #fff;
+    outline: none;
+}

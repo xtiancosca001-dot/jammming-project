@@ -1,15 +1,15 @@
 import React from 'react';
 import styles from './track.module.css'
 
-function Track({track}) {
+function Track({track, operation}) {
     return (
         <div className={styles.track}>
             <div>
-                <p class={styles.title}>{track.title}</p>
+                <p className={styles.name}>{track.name}</p>
                 <p>{track.artist} | {track.album}</p>
             </div>
-            <div>
-                <a href="">+</a>
+            <div className={styles.operation}>
+                <a href="">{operation}</a>
             </div>
         </div>
     );

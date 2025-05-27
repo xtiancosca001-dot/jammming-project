@@ -1,13 +1,13 @@
 import React from 'react';
 import TrackList from '../Tracklist/Tracklist';
 import styles from './search-results.module.css';
-import tracks from '../../utils/tracks';
 
-function SearchResults() {
+
+function SearchResults({results}) {
     return (
         <div className={styles.searchResults}>
             <h2>Results</h2>
-            <TrackList tracks={tracks}/>
+            {results.length>0 ? <TrackList tracks={results} operation={"+"}/> : <p>No results found</p> }
         </div>
     );
 }

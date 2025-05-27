@@ -3,7 +3,7 @@ import styles from './playlist.module.css';
 function Playlist() {
     return (
         <div className={styles.playlist}>
-            <h2>Playlist</h2>
+            <input type="text" placeholder="Enter a Playlist Name" />
             <button type="submit">SAVE TO SPOTIFY</button>
         </div>
     );  
