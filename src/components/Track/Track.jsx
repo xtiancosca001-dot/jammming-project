@@ -6,7 +6,7 @@ function Track({track, operation, operationOnClick}) {
         <div className={styles.track}>
             <div>
                 <p className={styles.name}>{track.name}</p>
-                <p>{track.artist} | {track.album}</p>
+                <p>{track.artists.map(a=>a.name).join(", ")} | {track.album.name}</p>
             </div>
             <div className={styles.operation}>
                 <a id={track.id} onClick={operationOnClick}>{operation}</a>
