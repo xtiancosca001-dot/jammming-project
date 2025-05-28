@@ -1,7 +1,7 @@
 const clientId = 'bb0603428d284800a9669277817244db';
 const redirectUri = 'http://127.0.0.1:5173/callback';
 const scope = 'playlist-modify-public playlist-modify-private';
-const apiSearchUrl = 'https://api.spotify.com/v1/search';
+const apiUrl = 'https://api.spotify.com/v1';
 
 function generateRandomString(length) {
     const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -186,7 +186,7 @@ const SpotifyAPI = {
         if(!token) throw new Error("No token available");
 
         const query = `track:${encodeURIComponent(searchText)}`;
-        const endpoint = `${apiSearchUrl}?q=${query}&type=track`;
+        const endpoint = `${apiUrl}/search?q=${query}&type=track`;
         try {
             const response = await fetch(endpoint, {
                 method: 'GET',
@@ -202,6 +202,48 @@ const SpotifyAPI = {
         } catch(e) {
             console.error(e);
         }
+    },
+
+    async fetchUserId() {
+        const token = await this.getAccessToken();
+        if(!token) throw new Error('No token available');
+
+       const endpoint = `${apiUrl}/me`;
+       try {
+        const response = await fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                "Content-Type": 'application/json',
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        if(response.ok) {
+            const jsonResponse = await response.json();
+            return jsonResponse;
+        }
+       } catch(e) {
+        console.error(`Unable to retrieve User ID: ${e}`);
+       }
+    },
+
+    async addToPlaylist() {
+        const token = await this.getAccessToken();
+        if(!token) throw new Error('No Token Available');
+
+        const userId = await this.fetchUserId();
+        const endpointPlaylist = `${apiUrl}/users/${userId}/playlists`;
+        try {
+            const response = await fetch(endpointPlaylist, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'application/json',
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+        } catch(e) {
+            console.error(`ERROR: Unable to add playlist: ${e}`);
+        }
+        
     },
 
     clearAuthData() {

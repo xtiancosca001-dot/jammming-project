@@ -75,15 +75,13 @@ function App() {
   const handleRemoveTrackFromPlaylist = (e) => {
     setPlaylistTracks(prev=>prev.filter(t=>t.id !== (e.target.id)));
   }
-  const handlePlaylistOnSubmit = (e) => {
+  const handlePlaylistOnSubmit = async (e) => {
     e.preventDefault();
-    alert("Bye Bye Bye... (dancing and dancing on and on)... I'm gonna remove your songs now. I have saved already your songs blah blah blah.");
-    const uris = playlistTracks.map(track=>`spotify:track:${track.id}`);
+    const userId = await SpotifyAPI.fetchUserId();
+    console.log(`USER ID : ${userId.id}`);
+    //const uris = playlistTracks.map(track=>`spotify:track:${track.id}`);
     // Save selected tracks as array of URIS
     // Format: [] -> spotify:track:<trackId>
-    console.log(uris);
-    const token = SpotifyAPI.getAccessToken();
-    console.log(token);
     console.log('Saving playlist '+ playlistName);
     setTimeout(() => {
       alert("Your playlist has been saved to Spotify");
