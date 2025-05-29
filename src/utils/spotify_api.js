@@ -1,5 +1,5 @@
 const clientId = 'bb0603428d284800a9669277817244db';
-const redirectUri = 'http://127.0.0.1:5173/callback';
+const redirectUri = 'https://xtiancosca001-dot.github.io/jammming-project/';
 const scope = 'playlist-modify-public playlist-modify-private';
 const apiUrl = 'https://api.spotify.com/v1';
 
