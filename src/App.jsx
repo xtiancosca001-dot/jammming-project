@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Header from './components/Header/Header';
 import SearchBar from './components/SearchBar/SearchBar';
 import ResultsContainer from './components/ResultsContainer/ResultsContainer';
-import Footer from './components/Footer/footer';
+import Footer from './components/Footer/Footer';
 import tracks from './utils/tracks';
 import SpotifyAPI from './utils/spotify_api';
 import './App.css';
