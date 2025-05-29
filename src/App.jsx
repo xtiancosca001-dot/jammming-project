@@ -59,7 +59,6 @@ function App() {
   // handle onClick for add button
   const handleAddTrackToPlaylist = (e) => {
     if(searchResults) {
-      console.log('pressed');
       const playlistTrack = searchResults.find(track=>track.id===e.target.id);
       //console.log(searchResults)
       //console.log(playlistTrack);
@@ -71,24 +70,34 @@ function App() {
       }
     }
   }
+
   // handle onClick for remove track from Playlist
   const handleRemoveTrackFromPlaylist = (e) => {
     setPlaylistTracks(prev=>prev.filter(t=>t.id !== (e.target.id)));
   }
+
   const handlePlaylistOnSubmit = async (e) => {
     e.preventDefault();
-    const userId = await SpotifyAPI.fetchUserId();
-    console.log(`USER ID : ${userId.id}`);
-    //const uris = playlistTracks.map(track=>`spotify:track:${track.id}`);
-    // Save selected tracks as array of URIS
-    // Format: [] -> spotify:track:<trackId>
+    let addPlaylistAndTracks;
+    // Save selected tracks as array of URIS ==> Format: [] -> spotify:track:<trackId>
+    const uris = playlistTracks.map(track=>`spotify:track:${track.id}`);
+    // Handle Errors (edge cases for blank playlist and tracklist)
+    if(!playlistName && uris.length <= 0) {
+      alert("ERROR: No parameters entered for tracklist and playlist name.");
+      throw new Error("ERROR: No parameters entered for tracklist and playlist name.")
+    } else if(!playlistName) {
+      alert('ERROR: Playlist name is blank.');
+      throw new Error('ERROR: Playlist name is blank.');
+    } if(uris.length <= 0) {
+      alert('ERROR: Playlist Submission received blank track list.');
+      throw new Error('ERROR: Playlist Submission received blank track list.');
+    }
+    addPlaylistAndTracks = await SpotifyAPI.addToPlaylist(playlistName, uris);    
     console.log('Saving playlist '+ playlistName);
     setTimeout(() => {
       alert("Your playlist has been saved to Spotify");
       setPlaylistTracks([]);
     },1000);
-    
-    
   }
   return (
     <>

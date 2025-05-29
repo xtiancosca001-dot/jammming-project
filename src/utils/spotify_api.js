@@ -226,24 +226,62 @@ const SpotifyAPI = {
        }
     },
 
-    async addToPlaylist() {
+    async addToPlaylist(playlistName, tracklist=[]) {
         const token = await this.getAccessToken();
         if(!token) throw new Error('No Token Available');
 
         const userId = await this.fetchUserId();
-        const endpointPlaylist = `${apiUrl}/users/${userId}/playlists`;
+        const endpointPlaylist = `${apiUrl}/users/${userId.id}/playlists`;
         try {
             const response = await fetch(endpointPlaylist, {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json',
                     "Authorization": `Bearer ${token}`
-                }
+                }, 
+                body: JSON.stringify({
+                    "name": playlistName,
+                    "description": "",
+                    "public": false
+                })
             });
+            if(response.ok) {
+                const jsonResponse  = await response.json();
+                console.log('Playlist created');
+                const tracksResponse = await this.addTrackToPlaylist(jsonResponse, tracklist);
+                console.log('Tracks added to playlist');
+                return tracksResponse;
+            }
         } catch(e) {
-            console.error(`ERROR: Unable to add playlist: ${e}`);
+            console.error(`ERROR: Unable to add playlist ${e}`);
         }
         
+    },
+
+    async addTrackToPlaylist(playlist, tracklist=[]) {
+        const token = await this.getAccessToken();
+        if(!token) throw new Error('No Token Available');
+
+        const endpointAddTrackToPlayist = `${apiUrl}/playlists/${playlist.id}/tracks`;
+        try {   
+            const response = await fetch(endpointAddTrackToPlayist, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    "uris": tracklist
+                })
+            });
+
+            if(response.ok) {
+                const jsonResponse = await response.json();
+                return jsonResponse;
+            }
+        } catch(e) {
+            console.error(`ERROR: Unable to add tracks to playlist ${e}`);
+        }
     },
 
     clearAuthData() {
