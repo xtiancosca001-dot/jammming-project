@@ -15,7 +15,7 @@ html {
 }
 
 body {
-  background: url('./src/assets/background.webp');
+  background: url('./assets/background.webp');
   background-repeat: no-repeat;
   object-fit: cover;
   background-position: center;
